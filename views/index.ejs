@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+
+<head>
+    <% include partials/head %>
+</head>
+
+<body>
+
+    <% include partials/header %>
+
+    <div class="container" style="min-height: 35%;">
+
+        <div class="topup_purchase_wizard">
+
+            <!--<button id="btn_back" type="button" class="btn btn-danger hidden">Back</button>-->
+
+            <div id="step_1" class="step_1 <% if (typeof question != 'undefined') {%> hidden <%}%>">
+                <h2 id="survey_page_header">Enter Survey Invitation Code</h2>
+                <p class="label_instruction">
+                    Enter the unique code assigned to you for this survey feedback in the box below and click "Next":
+                </p>
+                <form id="feedback_code_form" class="form-inline" action="/" method="post" style="margin: 0 auto; max-width: 500px">
+
+                    <div class="ui big fluid action input">
+                         <input id="feedback_code" name="feedback_code" type="tel" placeholder="type-in code here" maxlength="11"
+                          <% if (typeof feedbackCode != 'undefined') { %> value="<%= feedbackCode %>"<%}%>
+                          />
+
+                        <button type="submit" class="ui blue button" style="" id="btn_item1">Next</button>
+
+                    </div>
+
+                </form>
+            </div>
+
+            <!-- MDL Progress Bar with Indeterminate Progress -->
+            <div id="p2" class="mdl-progress mdl-js-progress mdl-progress__indeterminate" style="display:none"></div>
+
+            <div id="step_2" class="step_2 <% if (typeof question == 'undefined' && typeof questionType == 'undefined') {%> hidden <%}%>">
+
+                <form id="form_survey" class="ui form" action="/answers" method="POST" style="margin: 0 auto; max-width: 500px">
+
+                    <p class="label_instruction" style="text-align: left;">
+                    <% if (typeof question != 'undefined' && typeof questionType != 'undefined') { %>
+
+                    <%= question %>
+
+                    <% } %>
+                    </p>
+
+                    <% if (typeof questionType != 'undefined') { %>
+
+                    <%= questionType %>
+
+                    <% } %>
+
+                    <div class="row" aria-label="Buttons">
+
+                        <div class=".col-xs-12 .col-md-3" role="group" aria-label="Navigate Back" style="padding-left: 5px">
+                            <a href="/" id="btn_back" type="button" class="huge negative ui left floated button hidden" title="Click to go back and edit your survey invitation code.">
+                                <span class="glyphicon glyphicon-chevron-left"></span>&nbsp; Back
+                            </a>
+                            <button href="/" id="btn_forward" class="huge positive ui right floated button" title="Click to submit your answer and load the next question.">
+                                Next &nbsp;<span class="glyphicon glyphicon-chevron-right"></span>
+                            </button>
+                        </div>
+
+                    </div><!-- /div.row[aria-label="Buttons"] -->
+
+                </form>
+
+            </div><!-- /div#step_2 -->
+
+
+        </div><!-- /div.topup_purchase_wizard -->
+
+    </div><!-- /container -->
+
+    <footer class="container">
+        <% include  partials/footer %>
+    </footer>
+
+    <% if (typeof isDevEnvironment != 'undefined' && isDevEnvironment == 'true') { %>
+        <% include partials/browsersyncsnippet %>
+    <% } %>
+  <script type="text/javascript" src="js/script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,21 @@
+{
+  "name": "topup_dashboard",
+  "description": "Admin backend for the 101ng Topup Purchase site.",
+  "main": "server.js",
+  "authors": [
+    "Ugo Mmirikwe"
+  ],
+  "license": "ISC",
+  "homepage": "/",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "uikit": "^2.26.4"
+  }
+}

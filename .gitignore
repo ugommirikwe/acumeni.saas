@@ -1,0 +1,11 @@
+node_modules
+bower_components
+logs
+.idea
+webpay.sublime-project
+webpay.sublime-workspace
+data
+.vscode
+.env
+gulp*
+*.log

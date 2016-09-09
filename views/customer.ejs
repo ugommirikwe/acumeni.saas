@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+
+<head>
+  <% include partials/head %>
+</head>
+
+<body>
+
+  <div class="page-wrap">
+
+    <% include partials/header %>
+
+      <div class="uk-container uk-container-center">
+        <div class="uk-grid">
+
+          <div class="uk-width-large-1-2 uk-container-center">
+
+            <div class="uk-margin-large-top uk-margin-large-bottom uk-panel uk-panel-box uk-panel-space">
+
+              <!--<div class="">-->
+
+              <h3 class="uk-panel-title"><i class="uk-icon-user"></i>&nbsp;Customer Registration</h3>
+              <% if (typeof result != 'undefined' && result == 'success') { %>
+                <p>Successfully submitted form</p>
+                <% } %>
+                  <p>Fields marked with an asterisk (*) must be filled.</p>
+                  <form id="frmCustomerReg" action="/customer" method="POST" class="uk-form uk-form-stacked">
+
+                    <div class="uk-form-row" data-uk-margin>
+                      <label class="uk-form-label">Customer Full Name *</label>
+                      <input id="fullName" name="fullName" type="text" placeholder="" class="uk-form-large uk-width-1-1">
+                    </div>
+                    <div class="uk-form-row" data-uk-margin>
+                      <label class="uk-form-label">Email Address *</label>
+                      <input id="emailAddress" name="emailAddress" type="text" placeholder="" class="uk-form-large uk-width-1-1">
+                    </div>
+                    <div class="uk-form-row" data-uk-margin>
+                      <label class="uk-form-label">Phone Number *</label>
+                      <input id="phoneNumber" name="phoneNumber" type="text" placeholder="" class="uk-form-large uk-width-1-1">
+                    </div>
+                    <div class="uk-form-row" data-uk-margin>
+                      <label class="uk-form-label">Postal Address *</label>
+                      <input id="postalAddress" name="postalAddress" type="text" placeholder="" class="uk-form-large uk-width-1-1">
+                    </div>
+                    <div class="uk-form-row" data-uk-margin>
+                      <label class="uk-form-label">Additional Email Addresses</label>
+                      <textarea id="emailAddressesMore" name="emailAddressesMore" placeholder="" class="uk-form-large uk-width-1-1" cols="" rows="1"></textarea>
+                      <i class="uk-form-help-block">Enter email addresses seperated with commas</i>
+                    </div>
+
+                    <button class="uk-button uk-button-primary uk-button-large uk-form-width-small uk-margin-small-top" title="Click to submit form">
+                  Submit
+                </button>
+
+                  </form>
+
+                  <!--</div>-->
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+  </div>
+  <!-- div.page-wrap -->
+
+  <footer class="container site-footer">
+    <% include  partials/footer %>
+  </footer>
+
+  <!--<script type="text/javascript" src="js/lib/vue.js"></script>-->
+  <!--<script type="text/javascript" src="js/script.js"></script>-->
+  <script>
+    $('#frmCustomerReg').on('submit', function (event) {
+                event.preventDefault();
+                /*var phoneNumber = tel_field.val().trim();
+                if (phoneNumber == '') {
+                    notifyErrorMessage('Please enter the beneficiary\'s registered 101 Comms mobile phone number to TopUp.');
+                } else if (phoneNumber.length < 10) {
+                    notifyErrorMessage('The beneficiary\'s registered 101 Comms mobile phone number can\'t be less than 10 digits long.')
+                } else {
+                    clearErrorNotification();*/
+
+                    // toggleProgressBar(STEP_1);
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '/customer',
+                        data: {'fullName': $('#fullName').val()},
+                        success: function (dataReturned, textStatus, jqXHR) {
+                           if (dataReturned.result != undefined) {
+                              console.log(dataReturned.result);
+                              alert(dataReturned.result);
+                          }
+                        },
+                        dataType: 'json'
+                    });
+                /*}*/
+            });
+  </script>
+
+</body>
+
+</html>
